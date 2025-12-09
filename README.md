@@ -31,7 +31,7 @@ Certifique-se de ter o **XAMPP** instalado e os serviços **Apache** e **MySQL**
 Abra o terminal na pasta `htdocs` do seu XAMPP (`C:\xampp\htdocs` no Windows ou `/opt/lampp/htdocs` no Linux) e execute:
 
 ```bash
-git clone [https://github.com/milenabmota/fitness-log.git](https://github.com/milenabmota/fitness-log.git)
+git clone [https://github.com/milenabmota/Fitness-Log.git](https://github.com/milenabmota/Fitness-Log.git)
 ```
 
 ### 3. Configurar o Banco de Dados
