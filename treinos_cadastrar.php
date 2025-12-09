@@ -15,7 +15,7 @@ include 'includes/header.php';
 
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <h1 class="mb-4 text-primary"><i class="bi bi-stopwatch"></i> Registrar Novo Treino</h1>
+        <h1 class="mb-4 text-warning"><i class="bi bi-stopwatch"></i> Registrar Novo Treino</h1>
 
         <?php if (isset($_GET['erro'])): ?>
             <div class="alert alert-danger">
@@ -66,7 +66,7 @@ include 'includes/header.php';
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <a href="index.php" class="btn btn-secondary me-md-2">Cancelar</a>
-                        <button type="submit" class="btn btn-success btn-lg px-5">Salvar Treino</button>
+                        <button type="submit" class="btn btn-warning btn-lg px-5">Salvar Treino</button>
                     </div>
                 </form>
             </div>

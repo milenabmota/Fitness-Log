@@ -64,7 +64,7 @@ if (isset($_SESSION['usuario_logado'])):
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Meu Diário de Treinos</h2>
-        <a href="treinos_cadastrar.php" class="btn btn-success btn-lg shadow-sm">
+        <a href="treinos_cadastrar.php" class="btn btn-warning btn-lg shadow-sm">
             <i class="bi bi-plus-circle"></i> Registrar Treino
         </a>
     </div>
@@ -77,7 +77,7 @@ if (isset($_SESSION['usuario_logado'])):
                     <input type="date" name="filtro_data" class="form-control" value="<?= $filtro_data ?>">
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-warning">
                         <i class="bi bi-search"></i> Buscar
                     </button>
                     <?php if ($filtro_data): ?>
@@ -94,7 +94,7 @@ if (isset($_SESSION['usuario_logado'])):
         <div class="card shadow-sm border-0">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="table-primary text-white">
+                    <thead class="table-warning text-white">
                         <tr>
                             <th>Data</th>
                             <th>Exercício</th>
@@ -115,7 +115,7 @@ if (isset($_SESSION['usuario_logado'])):
                         ?>
                             <tr>
                                 <td><?= date('d/m/Y', strtotime($treino['data_treino'])); ?></td>
-                                <td class="fw-bold text-primary">
+                                <td class="fw-bold text-warning">
                                     <?= htmlspecialchars($treino['nome_exercicio']); ?>
                                 </td>
                                 <td><?= $treino['duracao_minutos']; ?> min</td>
@@ -138,7 +138,7 @@ if (isset($_SESSION['usuario_logado'])):
                     <tfoot class="table-light fw-bold">
                         <tr>
                             <td colspan="2" class="text-end text-uppercase">Totais:</td>
-                            <td class="text-primary"><?= $total_minutos_acumulado; ?> min</td>
+                            <td class="text-warning"><?= $total_minutos_acumulado; ?> min</td>
                             <td class="text-danger fs-5"><?= number_format($total_calorias_acumulado, 0, ',', '.'); ?> kcal</td>
                             <td colspan="2"></td>
                         </tr>
@@ -172,7 +172,7 @@ if (isset($_SESSION['usuario_logado'])):
         <div class="col-md-5">
             <div class="card shadow-lg border-0">
                 <div class="card-body p-5">
-                    <h2 class="text-center mb-4 fw-bold text-primary">Fitness Log</h2>
+                    <h2 class="text-center mb-4 fw-bold text-warning">Fitness Log</h2>
                     <p class="text-center text-muted mb-4">Entre para acessar seus treinos</p>
                     <form action="processa.php" method="POST">
                         <input type="hidden" name="acao" value="login">
@@ -185,9 +185,14 @@ if (isset($_SESSION['usuario_logado'])):
                             <input type="password" name="senha" class="form-control form-control-lg" required placeholder="Ex: 123456">
                         </div>
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg">ENTRAR</button>
+                            <button type="submit" class="btn btn-warning btn-lg">ENTRAR</button>
                         </div>
                     </form>
+                    <hr class="my-4">
+                    <div class="text-center">
+                        <a href="usuarios_cadastrar.php" class="btn btn-sm btn-outline-secondary w-100 mb-3">Criar Nova Conta</a>
+                        <a href="redefinir_senha.php" class="btn btn-sm btn-link text-warning">Esqueci minha senha</a>
+                    </div>
                 </div>
             </div>
         </div>

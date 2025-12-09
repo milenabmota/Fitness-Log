@@ -6,7 +6,7 @@ include 'includes/header.php';
 
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <h2 class="mb-4 text-primary"><i class="bi bi-plus-circle-dotted"></i> Novo Exercício</h2>
+        <h2 class="mb-4 text-warning"><i class="bi bi-plus-circle-dotted"></i> Novo Exercício</h2>
         
         <div class="card shadow-sm">
             <div class="card-body p-4">
@@ -26,7 +26,7 @@ include 'includes/header.php';
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <a href="treinos_cadastrar.php" class="btn btn-secondary me-md-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Salvar e Voltar</button>
+                        <button type="submit" class="btn btn-warning">Salvar e Voltar</button>
                     </div>
                 </form>
             </div>

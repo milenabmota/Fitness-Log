@@ -1,12 +1,12 @@
 <?php
 require_once 'config/database.php';
-verificar_admin(); //Apenas Admin
+//verificar_admin(); //Apenas Admin
 include 'includes/header.php';
 ?>
 
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <h2 class="mb-4 text-primary"><i class="bi bi-person-plus"></i> Novo Usuário</h2>
+        <h2 class="mb-4 text-warning"><i class="bi bi-person-plus"></i> Novo Usuário</h2>
 
         <?php if (isset($_GET['erro'])): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($_GET['erro']); ?></div>
@@ -33,17 +33,18 @@ include 'includes/header.php';
                         <div class="form-text">A senha será criptografada no banco.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <!---<div class="mb-3">
                         <label class="form-label fw-bold">Nível de Acesso</label>
                         <select name="nivel" class="form-select" required>
                             <option value="Comum" selected>Comum (Só vê os próprios treinos)</option>
                             <option value="Admin">Admin (Gerencia tudo)</option>
                         </select>
-                    </div>
+                    </div>--->
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                        <a href="usuarios.php" class="btn btn-secondary me-md-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Cadastrar Usuário</button>
+                        <!---<a href="usuarios.php" class="btn btn-secondary me-md-2">Cancelar</a>--->
+                        <a href="index.php" class="btn btn-secondary me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-warning">Cadastrar Usuário</button>
                     </div>
                 </form>
             </div>

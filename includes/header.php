@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Define o caminho base para que os links funcionem de qualquer pasta
 $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
 ?>
@@ -16,7 +17,7 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning shadow-sm"> 
         <div class="container">
             <a class="navbar-brand fw-bold" href="<?php echo $caminho; ?>index.php">
                 <i class="bi bi-activity"></i> Fitness Log
@@ -36,7 +37,7 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
                         </li>
                         <?php if (isset($_SESSION['usuario_nivel']) && $_SESSION['usuario_nivel'] == 'Admin'): ?>
                             <li class="nav-item">
-                                <a class="nav-link text-warning" href="<?php echo $caminho; ?>usuarios.php">Gerenciar Usuários</a> <!-- Admin only -->
+                                <a class="nav-link" href="<?php echo $caminho; ?>usuarios.php">Gerenciar Usuários</a> <!-- Admin only -->
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -48,7 +49,7 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
                             <span class="nav-link text-light">Olá, <strong><?php echo htmlspecialchars($_SESSION['usuario_logado']); ?></strong></span>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $caminho; ?>processa.php?acao=logout" class="btn btn-sm btn-danger mt-1">Sair</a>
+                            <a href="processa.php?acao=logout" class="btn btn-sm btn-danger mt-1">Sair</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -56,4 +57,5 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
         </div>
     </nav>
     <div class="container mt-4">
+
     

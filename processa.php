@@ -1,4 +1,5 @@
 <?php
+session_start();
 // --- MODO DE DEPURAÇÃO (Pode remover quando estiver tudo pronto) ---
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -47,7 +48,7 @@ try {
             session_unset();
             session_destroy();
             header("Location: index.php?msg=Você saiu do sistema.");
-            break;
+            exit();
 
         // ==================================================
         // CADASTRAR TREINO (Corrigido)
@@ -140,12 +141,12 @@ try {
 
             header("Location: index.php?msg=Treino atualizado!");
             break;
-
+        
         // ==================================================
         // CADASTRAR USUÁRIO 
         // ==================================================
         case 'cadastrar_usuario':
-            verificar_admin(); // Só admin cadastra
+            //verificar_admin(); // Só admin cadastra
 
             $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -196,6 +197,45 @@ try {
             break;
         default:
             header("Location: index.php?erro=Ação inválida.");
+        
+        // ==================================================
+        // REDEFINIR SENHA 
+        // ==================================================
+
+        case 'redefinir_senha':
+            $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
+            $nova_senha = filter_input(INPUT_POST, 'nova_senha', FILTER_DEFAULT);
+
+            if (empty($usuario) || empty($nova_senha)) {
+                header("Location: redefinir_direto.php?erro=Preencha todos os campos.");
+                exit();
+            }
+
+            // 1. Busca o ID do usuário
+            $stmt = mysqli_prepare($conn, "SELECT id FROM usuarios WHERE usuario = ?");
+            mysqli_stmt_bind_param($stmt, "s", $usuario);
+            mysqli_stmt_execute($stmt);
+            $resultado = mysqli_stmt_get_result($stmt);
+
+            if ($linha = mysqli_fetch_assoc($resultado)) {
+                $user_id = $linha['id'];
+                
+                // 2. Gera hash da nova senha
+                $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+
+                // 3. Atualiza a senha no BD
+                $update_stmt = mysqli_prepare($conn, "UPDATE usuarios SET senha = ? WHERE id = ?");
+                mysqli_stmt_bind_param($update_stmt, "si", $nova_senha_hash, $user_id);
+                mysqli_stmt_execute($update_stmt);
+
+                header("Location: index.php?msg=Senha redefinida com sucesso! Faça login com a nova senha.");
+                exit();
+            } else {
+                // Usuário não encontrado
+                header("Location: redefinir_senha.php?erro=Usuário não encontrado.");
+                exit();
+            }
+            break;
     }
 
 } catch (Exception $e) {
