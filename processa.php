@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 // --- MODO DE DEPURAÇÃO (Pode remover quando estiver tudo pronto) ---
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -151,8 +151,8 @@ try {
             $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $senha_original = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
-            $nivel = filter_input(INPUT_POST, 'nivel', FILTER_SANITIZE_SPECIAL_CHARS);
-
+            //$nivel = filter_input(INPUT_POST, 'nivel', FILTER_SANITIZE_SPECIAL_CHARS);
+            $nivel = 'Comum'; 
             // Criptografa a senha antes de salvar (OBRIGATÓRIO)
             $senha_hash = password_hash($senha_original, PASSWORD_DEFAULT);
 
@@ -163,7 +163,8 @@ try {
 
             try {
                 if (mysqli_stmt_execute($stmt)) {
-                    header("Location: usuarios.php?msg=Usuário cadastrado com sucesso!");
+                    header("Location: index.php?msg=Cadastro feito.");
+                    exit();
                 }
             } catch (mysqli_sql_exception $e) {
                 // Erro 1062 significa duplicidade (usuário já existe)
@@ -228,7 +229,7 @@ try {
                 mysqli_stmt_bind_param($update_stmt, "si", $nova_senha_hash, $user_id);
                 mysqli_stmt_execute($update_stmt);
 
-                header("Location: index.php?msg=Senha redefinida com sucesso! Faça login com a nova senha.");
+                header("Location: index.php?msg=Faça login com a nova senha.");
                 exit();
             } else {
                 // Usuário não encontrado
