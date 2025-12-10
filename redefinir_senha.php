@@ -17,23 +17,17 @@ include 'includes/header.php';
 
                 <form action="processa.php" method="POST">
                     <input type="hidden" name="acao" value="redefinir_senha">
-                    
                     <div class="mb-3">
-                        <label class="form-label">Nome de Usuário</label>
+                        <label class="form-label fw-bold">Nome de Usuário</label>
                         <input type="text" name="usuario" class="form-control form-control-lg" required>
                     </div>
-                    
                     <div class="mb-3">
-                        <label class="form-label">Nova Senha</label>
+                        <label class="form-label fw-bold">Nova Senha</label>
                         <input type="password" name="nova_senha" class="form-control form-control-lg" required minlength="6">
                     </div>
-                    
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-warning btn-lg">REDEFINIR SENHA</button>
-                    </div>
-                    
-                    <div class="text-center mt-3">
-                        <a href="index.php" class="btn btn-link">Voltar</a>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="index.php" class="btn btn-secondary me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-warning me-md-2">REDEFINIR SENHA</button>                        
                     </div>
                 </form>
             </div>
