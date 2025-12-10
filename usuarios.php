@@ -13,8 +13,8 @@ $resultado = mysqli_query($conn, $sql);
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="text-primary"><i class="bi bi-people"></i> Gerenciar Usuários</h2>
-    <a href="usuarios_cadastrar.php" class="btn btn-primary shadow-sm">
+    <h2 class="text-warning"><i class="bi bi-people"></i> Gerenciar Usuários</h2>
+    <a href="usuarios_cadastrar.php" class="btn btn-warning shadow-sm">
         <i class="bi bi-person-plus-fill"></i> Novo Usuário
     </a>
 </div>

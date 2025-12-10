@@ -19,7 +19,7 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-warning shadow-sm"> 
         <div class="container">
-            <a class="navbar-brand fw-bold" href="<?php echo $caminho; ?>index.php">
+            <a class="navbar-brand fw-bold" href="index.php">
                 <i class="bi bi-activity"></i> Fitness Log
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -30,14 +30,14 @@ $caminho = (basename(getcwd()) == 'fitness_log') ? '' : '../';
                 <ul class="navbar-nav me-auto">
                     <?php if (isset($_SESSION['usuario_logado'])): ?>
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo $caminho; ?>index.php">Meus Treinos</a>
+                            <a class="nav-link active" href="index.php">Meus Treinos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $caminho; ?>treinos_cadastrar.php">Cadastrar Exercício</a>
+                            <a class="nav-link" href="treinos_cadastrar.php">Cadastrar Exercício</a>
                         </li>
                         <?php if (isset($_SESSION['usuario_nivel']) && $_SESSION['usuario_nivel'] == 'Admin'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo $caminho; ?>usuarios.php">Gerenciar Usuários</a> <!-- Admin only -->
+                                <a class="nav-link" href="usuarios.php">Gerenciar Usuários</a> <!-- Admin only -->
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
