@@ -52,6 +52,11 @@ $resultado = mysqli_query($conn, $sql);
                             <?php endif; ?>
                         </td>
                         <td>
+                            <a href="usuarios_editar.php?   id=<?= $user['id']; ?>" 
+                                class="btn btn-sm btn-outline-warning"
+                                onclick="return confirm('Tem certeza que deseja editar o usuário <?= htmlspecialchars($user['usuario']); ?>?');">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>                            
                             <?php if ($user['id'] != $_SESSION['usuario_id']): ?>
                                 <a href="processa.php?acao=excluir_usuario&id=<?= $user['id']; ?>" 
                                    class="btn btn-sm btn-outline-danger"

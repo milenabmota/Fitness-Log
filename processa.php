@@ -177,6 +177,62 @@ try {
             break;
 
         // ==================================================
+        // EDITAR USUÁRIO 
+        // ==================================================
+        case 'editar_usuario':
+            //verificar_admin(); // Só admin cadastra
+
+            $id_usuario = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+                $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
+                $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+                $senha_original = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS); // Pode ser vazio
+                $nivel = filter_input(INPUT_POST, 'nivel', FILTER_SANITIZE_SPECIAL_CHARS);
+
+                if (!$id_usuario || empty($usuario) || empty($email) || empty($nivel)) {
+                    header("Location: usuario_editar.php?id=" . $id_usuario . "&erro=Erro: Campos obrigatórios faltando.");
+                    exit();
+                }
+
+                $sql = "UPDATE usuarios SET usuario = ?, email = ?, nivel = ?";
+                $params = [$usuario, $email, $nivel];
+                $tipos = "sss";
+                
+                // Se a senha foi fornecida, atualiza a senha também
+                if (!empty($senha_original)) {
+                    $senha_hash = password_hash($senha_original, PASSWORD_DEFAULT);
+                    $sql .= ", senha = ?";
+                    $tipos .= "s";
+                    $params[] = $senha_hash; // Adiciona o hash da senha aos parâmetros
+                }
+
+                $sql .= " WHERE id = ?";
+                $tipos .= "i";
+                $params[] = $id_usuario; // Adiciona o ID ao final dos parâmetros
+
+                // Prepara e executa o statement
+                $stmt = mysqli_prepare($conn, $sql);
+
+                // Cria o array de referência para mysqli_stmt_bind_param
+                // Isso é necessário pois bind_param exige que as variáveis sejam passadas por referência
+                array_unshift($params, $tipos); // Adiciona a string de tipos no início
+                call_user_func_array('mysqli_stmt_bind_param', array_merge([$stmt], $params));
+
+                try {
+                    if (mysqli_stmt_execute($stmt)) {
+                        header("Location: usuarios.php?msg=Usuário **" . $usuario . "** editado com sucesso.");
+                        exit();
+                    }
+                } catch (mysqli_sql_exception $e) {
+                    // Erro 1062 significa duplicidade (usuário já existe)
+                    if ($e->getCode() == 1062) {
+                        header("Location: usuario_editar.php?id=" . $id_usuario . "&erro=Erro: Este nome de usuário ou email já existe.");
+                    } else {
+                        throw $e; // Outro erro
+                    }
+                }
+                break;
+
+        // ==================================================
         // EXCLUIR USUÁRIO 
         // ==================================================
         case 'excluir_usuario':
